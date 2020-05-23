@@ -28,3 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 Used SAP Fundamentals
+
+Icons made by <a href="https://www.flaticon.com/authors/ultimatearm" title="ultimatearm">ultimatearm</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
+
