@@ -12,6 +12,8 @@ import { InfiniteScrollModule } from '@fundamental-ngx/core';
 import { InputGroupModule } from '@fundamental-ngx/core';
 import { LoanAmmountComponent } from './loan-view/loan-ammount/loan-ammount.component';
 import { FormsModule } from '@angular/forms';
+import { LoanViewComponent } from './loan-view/loan-view.component';
+import { DatePickerModule } from '@fundamental-ngx/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     HomeViewComponent,
     LoanAmmountComponent,
+    LoanViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { FormsModule } from '@angular/forms';
     InfiniteScrollModule,
     InputGroupModule,
     FormsModule,
+    DatePickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

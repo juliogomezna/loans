@@ -1,6 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 
-
 @Component({
     selector: 'app-loan-ammount',
     templateUrl: './loan-ammount.component.html',

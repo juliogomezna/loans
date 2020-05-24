@@ -1,0 +1,19 @@
+.fd-action-bar__header {
+    padding-left: 20px;
+}
+.center-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+fd-panel{
+    margin-left:20%;
+    margin-right: 20%;
+
+    fd-panel-header{
+        text-align: center;
+        fd-panel-head{
+            width: 100%;
+        }
+    }
+}
