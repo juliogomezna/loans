@@ -10,7 +10,8 @@ import { FundamentalNgxCoreModule, ShellbarModule } from '@fundamental-ngx/core'
 import { HomeViewComponent } from './home-view/home-view.component';
 import { InfiniteScrollModule } from '@fundamental-ngx/core';
 import { InputGroupModule } from '@fundamental-ngx/core';
-import { LoanAmmountComponent } from './loan-ammount/loan-ammount.component';
+import { LoanAmmountComponent } from './loan-view/loan-ammount/loan-ammount.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { LoanAmmountComponent } from './loan-ammount/loan-ammount.component';
     ShellbarModule,
     InfiniteScrollModule,
     InputGroupModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

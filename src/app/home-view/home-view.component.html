@@ -1,8 +1,31 @@
-<div class="home fd-app__main">
-    <h1 class="big-title">ZINOBE</h1>
-    <p class="head"> Somos la nueva solución financiera</p>
-    <div class="ammount-input">
-        <app-loan-ammount></app-loan-ammount>
+<section class="fd-section">
+    <div class="fd-layout-grid">
+        <div class="fd-panel">
+            <div class="home fd-app__main">
+                <h1 class="big-title">ZINOBE</h1>
+                <p class="head"> Somos la nueva solución financiera</p>
+            </div>
+        </div>
     </div>
+</section>
 
-</div>
+<section class="fd-section">
+    <div class="fd-layout-grid">
+        <div class="fd-form__item fd-col--2">
+            <div class="ammount-input">
+                <app-loan-ammount
+                [conditions]= "conditions"
+                (ammountEntered)=" ammount = $event"></app-loan-ammount>
+            </div>
+        </div>
+        <div class="fd-panel">
+            <br />
+            <button
+                fd-button
+                
+                [fdType]="'attention'"
+                (click)="fulfillRequest()"
+            >Solicita tu prestamo</button>
+        </div>
+    </div>
+</section>

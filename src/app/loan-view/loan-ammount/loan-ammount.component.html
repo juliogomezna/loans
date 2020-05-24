@@ -1,0 +1,24 @@
+<div>
+
+    <div class="fd-form-item">
+            <label class="fd-form-label" for="">ingresa cantidad deseada</label>
+            <div class="fd-input-group">
+                <span class="fd-input-group__addon">$</span>
+                <input
+                    class="fd-input fd-input-group__input"
+                    type="number"
+                    placeholder="dinero solicitado"
+                    [(ngModel)]= "ammountRequested"
+                    (input)="validate()"
+                >
+            </div>
+        </div>
+    <div class="fd-panel">
+            <span>Conoce las condiciones </span>
+            <fd-inline-help [triggers]="['click']">
+                Puedes ingresar una suma entre {{ conditions.ammount.min }} y {{ conditions.ammount.max }}
+            </fd-inline-help>
+            <br />
+        </div>
+    
+</div>
