@@ -1,52 +1,70 @@
-<fd-panel>
+<div>
+    <fd-panel>
+        <fd-panel-header>
+            <fd-panel-head>
+                <div fd-action-bar-header>
+                    <h1>ZINOBE</h1>
+                    <div fd-action-bar-description>
+                        <h2>Aplica para tu crédito</h2>
+                    </div>
+                </div>
+                <h3>Completa la información para tu aplicación</h3>
+            </fd-panel-head>
+        </fd-panel-header>
 
-    <fd-panel-header>
-        <fd-panel-head>
-            <div fd-action-bar-header>
-                <h1>ZINOBE</h1>
-                <div fd-action-bar-description>
-                    <h2>Aplica para tu crédito</h2>
+        <fd-panel-body>
+            <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+                <div class="fd-form__set fd-container fd-container--centered">
+                    <div class="fd-form__item fd-col--6">
+                        <label class="fd-form__label" for="name"> Nombre </label>
+                        <input
+                            class="fd-form__control"
+                            type="text"
+                            name="name"
+                            placeholder="nombre"
+                            [(ngModel)]="userModel.name"
+                        />
+                    </div>
+                    <div class="fd-form__item fd-col--6">
+                        <label class="fd-form__label" for="correo"> Correo </label>
+                        <input
+                            class="fd-form__control"
+                            type="email"
+                            name="correo"
+                            placeholder="xx@xx.com"
+                            [(ngModel)]="userModel.mail"
+                        />
+                    </div>
                 </div>
-            </div>
-            <h3>Completa la información para tu aplicación</h3>
-        </fd-panel-head>
-    </fd-panel-header>
-
-    <fd-panel-body>
-        <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-            <div class="fd-form__set fd-container fd-container--centered">
-                <div class="fd-form__item fd-col--6">
-                    <label class="fd-form__label" for="name"> Nombre </label>
-                    <input class="fd-form__control" type="text" name="name" placeholder="nombre" />
+                <div class="fd-form__set fd-container fd-container--centered">
+                    <div class="fd-form__item fd-col--2">
+                        <label class="fd-form__label" for="cedula"> Cédula </label>
+                        <input
+                            class="fd-form__control"
+                            type="text"
+                            name="cedula"
+                            [(ngModel)]="userModel.dni"
+                        />
+                    </div>
                 </div>
-                <div class="fd-form__item fd-col--6">
-                    <label class="fd-form__label" for="correo"> Correo </label>
-                    <input class="fd-form__control" type="email" name="correo" placeholder="xx@xx.com" />
+                <div class="fd-form__set fd-container fd-container--centered">
+                    <div class="fd-form__item fd-col--6">
+                        <app-loan-ammount [conditions]="conditions" (ammountEntered)=" creditModel.value = $event">
+                        </app-loan-ammount>
+                    </div>
                 </div>
-            </div>
-            <div class="fd-form__set fd-container fd-container--centered">
-                <div class="fd-form__item fd-col--2">
-                    <label class="fd-form__label" for="cedula"> Cédula </label>
-                    <input class="fd-form__control" type="text" name="cedula" />
+                <div class="fd-form__set fd-container fd-container--centered">
+                    <div class="fd-form__item fd-col--6">
+                        <fd-date-picker [type]="'single'" [(ngModel)]="creditModel.possiblePayDate" name="date"></fd-date-picker>
+                    </div>
                 </div>
-            </div>
-            <div class="fd-form__set fd-container fd-container--centered">
-                <div class="fd-form__item fd-col--6">
-                    <app-loan-ammount [conditions]="conditions" (ammountEntered)=" ammount = $event">
-                    </app-loan-ammount>
+                <div class="center-container">
+                    <button fd-button [fdType]="'emphasized'" type="submit">Enviar solicitud</button>
                 </div>
-            </div>
-            <div class="fd-form__set fd-container fd-container--centered">
-                <div class="fd-form__item fd-col--6">
-                    <fd-date-picker [type]="'single'" [(ngModel)]="date" name="date"></fd-date-picker>
-                </div>
-            </div>
-            <div class="center-container">
-                <button fd-button [fdType]="'emphasized'" type="submit">Enviar solicitud</button>
-            </div>
-        </form>
-    </fd-panel-body>
-
-    <fd-panel-footer>
-    </fd-panel-footer>
-</fd-panel>
+            </form>
+        </fd-panel-body>
+    </fd-panel>
+    <div class="bank-information-panel">
+        <app-bank-info-view></app-bank-info-view>
+    </div>
+</div>

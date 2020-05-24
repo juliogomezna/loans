@@ -1,19 +1,31 @@
 .fd-action-bar__header {
     padding-left: 20px;
 }
-.center-container{
+
+.center-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-fd-panel{
-    margin-left:20%;
+
+fd-panel {
+    margin-left: 20%;
     margin-right: 20%;
 
-    fd-panel-header{
+    fd-panel-header {
         text-align: center;
-        fd-panel-head{
+
+        fd-panel-head {
             width: 100%;
         }
     }
+}
+
+.bank-information-panel {
+    background-color: white;
+    position: fixed;
+    right: 0;
+    width: fit-content;
+    top: 20%;
+    border-radius: 4px;
 }
