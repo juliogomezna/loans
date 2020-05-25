@@ -30,11 +30,8 @@ app.use((req, res, next) => {
 app.use(express.json())
 
 app.route('/api/users').get((req, res) => {
-    //usersCollection = dbo.collection('users')
-    //res.send({hello: 'world'});
 
     MongoClient.connect(url, function(err, db) {
-       // var cursor = db.db.collection('users').find().pretty();
 
         dbo = db.db("zinobe");
         usersCollection = dbo.collection('users').find().toArray(function(err, result) {
@@ -45,8 +42,18 @@ app.route('/api/users').get((req, res) => {
     });
   })
   
-app.route('/api/cats').get((req, res) => {
-    res.send({hello: 'world'});
+app.route('/api/users').post((req, res) => {
+    console.log('PPOST');
+    console.log(req.body);
+    MongoClient.connect(url, function(err, db) {
+
+        dbo = db.db("zinobe");
+        dbo.collection('users').insert(req.body,function(err, result){
+            if (err) throw err;
+            res.send(result);
+            db.close();
+        })
+    });
 })
 
 app.listen(4201, '127.0.0.1', function() {

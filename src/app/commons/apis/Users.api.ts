@@ -9,7 +9,12 @@ export class UserApiService {
     constructor(private httpClient: HttpClient) {
     }
 
-    public getAllUser(): Observable<any[]>{
-        return this.httpClient.get<any[]>(`${SERVER_URL}/api/cats`);
+    public getAllUser(): Observable<User[]> {
+        return this.httpClient.get<User[]>(`${SERVER_URL}/api/users`);
     }
+
+    public postUserCredit(user: User): Observable<User> {
+        return this.httpClient.post<User>(`${SERVER_URL}/api/users`, user);
+    }
+
 }

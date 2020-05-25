@@ -9,7 +9,12 @@ export class LoanService {
     constructor(private userApiService: UserApiService) {
     }
 
-    getAllCredits(): Observable<any[]> {
+    getAllCredits(): Observable<User[]> {
         return this.userApiService.getAllUser();
     }
+
+    saveUserCredit(user: User): Observable<User> {
+        return this.userApiService.postUserCredit(user);
+    }
+
 }

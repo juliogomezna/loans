@@ -1,4 +1,5 @@
 <div>
+    <fd-loading-spinner [loading]="savingIndicator"></fd-loading-spinner>
     <fd-panel>
         <fd-panel-header>
             <fd-panel-head>
@@ -68,3 +69,12 @@
         <app-bank-info-view></app-bank-info-view>
     </div>
 </div>
+<button fd-button (click)="openFromTemplate(template)">Open from Template</button>
+<!-- Defining a template to open -->
+<ng-template let-alert #template>
+        <p>{{ alert.data.firstLine }}</p>
+        <p>{{ alert.data.secondLine }}</p>
+        <button fd-button [fdType]="'positive'" [compact]="true" (click)="alert.dismiss('Data passed back')">
+            Click to dismiss
+        </button>
+    </ng-template>
