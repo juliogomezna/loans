@@ -19,6 +19,8 @@ import { BankInfoViewComponent } from './bank-info-view/bank-info-view.component
 import { TileModule } from '@fundamental-ngx/core';
 import { LoanService } from './commons/services/loan.service';
 import { UserApiService } from './commons/apis/Users.api';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,7 @@ import { UserApiService } from './commons/apis/Users.api';
     TileModule,
     HttpClientModule,
   ],
-  providers: [LoanService, UserApiService],
+  providers: [LoanService, UserApiService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

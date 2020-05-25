@@ -48,8 +48,19 @@ export class LoanViewComponent implements OnInit {
         this.userModel.credits.push(this.creditModel);
         this.loanService.saveUserCredit(this.userModel).subscribe(
             user => {
-                console.log('Saved correctly');
                 this.savingIndicator = false;
+                const alertRef = this.alertService.open(this.template, {
+                    type: 'success',
+                    duration: -1,
+                    data: {
+                        firstLine: 'El credito ha sido aprobado satisfactoriamente, dirigete a tu cuenta para gestionarlo',
+                    }
+                });
+        
+                alertRef.afterDismissed.subscribe((data) => {
+                    // Do something after closing, receive data
+                    // You can also manually close this alert using alertRef.dismiss()
+                });
             },
             error => {
                 console.log('there is an error');
@@ -59,18 +70,6 @@ export class LoanViewComponent implements OnInit {
     }
 
     openFromTemplate(): void {
-        const alertRef = this.alertService.open(this.template, {
-            type: 'success',
-            duration: -1,
-            data: {
-                firstLine: 'This alert passes data to the template.',
-                secondLine: 'It also has [duration]="-1" and will not disappear automatically.'
-            }
-        });
-
-        alertRef.afterDismissed.subscribe((data) => {
-            // Do something after closing, receive data
-            // You can also manually close this alert using alertRef.dismiss()
-        });
+        
     }
 }
