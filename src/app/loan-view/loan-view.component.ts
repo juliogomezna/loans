@@ -45,10 +45,12 @@ export class LoanViewComponent implements OnInit {
 
     onSubmit() {
         this.savingIndicator = true;
+        this.creditModel.state="rechazado";
         this.userModel.credits.push(this.creditModel);
         this.loanService.saveUserCredit(this.userModel).subscribe(
             user => {
-                this.savingIndicator = false;
+                console.log(user);
+                /*this.savingIndicator = false;
                 const alertRef = this.alertService.open(this.template, {
                     type: 'success',
                     duration: -1,
@@ -58,9 +60,8 @@ export class LoanViewComponent implements OnInit {
                 });
         
                 alertRef.afterDismissed.subscribe((data) => {
-                    // Do something after closing, receive data
-                    // You can also manually close this alert using alertRef.dismiss()
-                });
+                    
+                });*/
             },
             error => {
                 console.log('there is an error');

@@ -19,7 +19,7 @@ import { BankInfoViewComponent } from './bank-info-view/bank-info-view.component
 import { TileModule } from '@fundamental-ngx/core';
 import { LoanService } from './commons/services/loan.service';
 import { UserApiService } from './commons/apis/Users.api';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LoanListComponent } from './loan-view/loan-list/loan-list.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     LoanAmmountComponent,
     LoanViewComponent,
     BankInfoViewComponent,
+    LoanListComponent,
   ],
   imports: [
     BrowserModule,

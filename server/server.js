@@ -61,15 +61,15 @@ app.route('/api/users').post((req, res) => {
                 .updateOne({ _id: result._id }, {$set : {"credits": result.credits}}, function(err, resultUpdated) {
                     if (err) throw err;
                     console.log("1 document updated");
-                    res.send(resultUpdated);
+                    res.send(req.body);
                     db.close();
                   });
             }else {
                 req.body.rejected= aprove();
-                req.body.rejected? req.body.credits[0].state="ACEPTADO": req.body.credits[0].state="DENEGADO";
+                !req.body.rejected? req.body.credits[0].state="ACEPTADO": req.body.credits[0].state="DENEGADO";
                 dbo.collection('users').insertOne(req.body,function(err, result){
                     if (err) throw err;
-                    res.send(result);
+                    res.send(req.body);
                     db.close();
                 })
             }
@@ -77,9 +77,6 @@ app.route('/api/users').post((req, res) => {
     });
 })
 
-/*function saveUser(user, dbo, res, db){
-    
-}*/
 
 function aprove(){
     return Math.random() < 0.5 ? true: false;
