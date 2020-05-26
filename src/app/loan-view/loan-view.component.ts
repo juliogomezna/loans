@@ -14,8 +14,8 @@ export class LoanViewComponent implements OnInit {
 
     conditions = {
         ammount: {
-            min: 1,
-            max: 100
+            min: 1000,
+            max: 100000
         }
     };
 

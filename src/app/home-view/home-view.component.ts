@@ -11,8 +11,8 @@ export class HomeViewComponent {
     //TODO: Turn into model
     conditions = {
         ammount: {
-            min: 1,
-            max: 100
+            min: 1000,
+            max: 100000
         }
     };
 

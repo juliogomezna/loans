@@ -52,7 +52,7 @@ app.route('/api/users').post((req, res) => {
         dbo.collection('users')
         .findOne({ mail: req.body.mail },function(err, result) {
             if (err) throw err;
-            console.log(result)
+            req.body.credits[0].paid= false;
             if(result){
                 !result.rejected ? req.body.credits[0].state="ACEPTADO" : req.body.credits[0].state="DENEGADO";
                 

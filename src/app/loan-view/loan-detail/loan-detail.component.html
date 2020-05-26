@@ -1,0 +1,46 @@
+
+<fd-panel>
+    <fd-panel-header>
+        <fd-panel-head>
+            <div fd-action-bar-header>
+                <h1>usuario {{ user.name }}</h1>
+                <div fd-action-bar-description>
+                    <h2>historia de credito</h2>
+                </div>
+            </div>
+        </fd-panel-head>
+    </fd-panel-header>
+    <fd-panel-body>
+        <div class="fd-form__set fd-container fd-container--centered">
+            <div class="fd-form__item fd-col--6">
+                <label class="fd-form__label" for="name"> Nombre: {{user.name}} </label>
+            </div>
+            <div class="fd-form__item fd-col--6">
+                <label class="fd-form__label" for="correo"> Correo: {{user.mail}} </label>
+            </div>
+        </div>
+        <div class="fd-form__set fd-container fd-container--centered">
+            <div class="fd-form__item fd-col--6">
+                <label class="fd-form__label" for="cedula"> Cédula: {{user.dni}}</label>
+            </div>
+        </div>
+        <h2>Detalle Credito</h2>
+        <div class="fd-form__set fd-container fd-container--centered">
+
+            <ul fd-list>
+                <li *ngFor= "let credit of user.credits; let i = index" fd-list-item>
+                    <span fd-list-icon ></span>
+                    <div class="fd-form__item fd-col--3">
+                        <label class="fd-form__label" for="name"> Valor: {{ credit.value }} </label>
+                    </div>
+                    <div class="fd-form__item fd-col--3">
+                        <label class="fd-form__label" for="correo"> posible fecha de pago: {{ credit.possiblePayDate.day }}-{{ credit.possiblePayDate.month }}-{{ credit.possiblePayDate.year }}</label>
+                    </div>
+                    <div class="fd-form__item fd-col--3">
+                        <label class="fd-form__label" for="correo"> estado: {{ credit.state }}</label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </fd-panel-body>
+</fd-panel>

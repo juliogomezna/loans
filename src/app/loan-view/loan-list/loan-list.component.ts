@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { User } from 'src/app/commons/models/user.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoanService } from 'src/app/commons/services/loan.service';
 
 @Component({
@@ -10,11 +10,9 @@ import { LoanService } from 'src/app/commons/services/loan.service';
 })
 export class LoanListComponent {
 
-    selectedProducts = [];
-
     users: User[];
 
-    constructor(private router: Router, private loanService: LoanService) { }
+    constructor(private router: Router, private loanService: LoanService, private route: ActivatedRoute) { }
 
     allSelected = false;
 
@@ -30,6 +28,8 @@ export class LoanListComponent {
 
     goToDetailUser(userSelected) {
         console.log("going to detail")
-        console.log(userSelected)
+        console.log(userSelected);
+        this.router.navigate([userSelected.dni], { state: {user: userSelected},
+         relativeTo: this.route});
     }
 }

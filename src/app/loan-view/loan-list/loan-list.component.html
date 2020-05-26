@@ -5,7 +5,7 @@
             <div fd-action-bar-header>
                 <h1>ZINOBE</h1>
                 <div fd-action-bar-description>
-                    <h2>Solicitudes actuales de crédito</h2>
+                    <h2>Solicitudes de crédito</h2>
                 </div>
             </div>
         </fd-panel-head>
@@ -26,7 +26,7 @@
                     <td fd-table-cell>{{ user.name }}</td>
                     <td fd-table-cell>{{ user.dni }}</td>
                     <td fd-table-cell>{{ user.credits.length }}</td>
-                    <td fd-table-cell><a [routerLink]="" (click)="goToDetailUser(row.product,false)">ver historial </a></td>
+                    <td fd-table-cell><a [routerLink]="" (click)="goToDetailUser(user)">ver historial </a></td>
                 </tr>
             </tbody>
         </table>

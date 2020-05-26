@@ -1,0 +1,37 @@
+<fd-panel>
+    <fd-panel-header>
+        <fd-panel-head>
+            <div fd-action-bar-header>
+                <h1>ZINOBE</h1>
+                <div fd-action-bar-description>
+                    <h2>Informe de creditos</h2>
+                </div>
+            </div>
+        </fd-panel-head>
+    </fd-panel-header>
+
+    <fd-panel-body>
+        <table fd-table>
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell>Nombre</th>
+                    <th fd-table-cell>Monto</th>
+                    <th fd-table-cell fdColumnSortable [sortDir]="column1SortDir" (click)="sortColumn1()">Estado</th>
+                    <th fd-table-cell>Pagado</th>
+                    <th fd-table-cell></th>
+                </tr>
+            </thead>
+            <tbody fd-table-body>
+                <tr *ngFor="let credit of credits; let i = index" fd-table-row>
+                    <td fd-table-cell>{{ credit.user.name }}</td>
+                    <td fd-table-cell>{{ credit.value }}</td>
+                    <td fd-table-cell>{{ credit.state }}</td>
+                    <td fd-table-cell>{{ credit.paid? 'SI': 'NO' }}</td>
+                    <td fd-table-cell>
+                        <button fd-button *ngIf="credit.state === 'ACEPTADO' && !credit.paid">Pagar</button>
+                        
+                </tr>
+            </tbody>
+        </table>
+    </fd-panel-body>
+</fd-panel>

@@ -20,6 +20,9 @@ import { TileModule } from '@fundamental-ngx/core';
 import { LoanService } from './commons/services/loan.service';
 import { UserApiService } from './commons/apis/Users.api';
 import { LoanListComponent } from './loan-view/loan-list/loan-list.component';
+import { LoanDetailComponent } from './loan-view/loan-detail/loan-detail.component';
+import { ListModule } from '@fundamental-ngx/core';
+import { informComponent } from './loan-view/informs/inform.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { LoanListComponent } from './loan-view/loan-list/loan-list.component';
     LoanViewComponent,
     BankInfoViewComponent,
     LoanListComponent,
+    LoanDetailComponent,
+    informComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,7 @@ import { LoanListComponent } from './loan-view/loan-list/loan-list.component';
     DatePickerModule,
     TileModule,
     HttpClientModule,
+    ListModule,
   ],
   providers: [LoanService, UserApiService,],
   bootstrap: [AppComponent]

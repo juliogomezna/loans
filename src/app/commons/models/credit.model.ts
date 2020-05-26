@@ -1,4 +1,5 @@
 import { FdDate } from '@fundamental-ngx/core';
+import { User } from './user.model';
 
 export class Credit {
     id: number;
@@ -7,4 +8,5 @@ export class Credit {
     paid: boolean;
     dateRequested: FdDate;
     possiblePayDate: FdDate;
+    user?: User; 
 }
