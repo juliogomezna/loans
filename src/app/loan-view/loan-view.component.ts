@@ -5,6 +5,7 @@ import { User } from '../commons/models/user.model';
 import { Credit } from '../commons/models/credit.model';
 import { LoanService } from '../commons/services/loan.service';
 import { Router } from '@angular/router';
+import { BankApiService } from '../commons/apis/Bank.api.service';
 
 @Component({
     selector: 'app-loan-view',
@@ -28,11 +29,18 @@ export class LoanViewComponent implements OnInit {
     userModel: User;
     creditModel: Credit;
     savingIndicator: boolean;
+    bankInfo;
 
-    constructor(private loanService: LoanService, public alertService: AlertService, private router: Router) {}
+    constructor(private loanService: LoanService,
+        public alertService: AlertService,
+        private router: Router,
+        private bankApi:BankApiService) {}
 
     ngOnInit() {
         this.initValues();
+        this.bankApi.getBankInfo().subscribe(bank => {
+            this.bankInfo= bank;
+        })
     }
 
     initValues(){
@@ -40,11 +48,15 @@ export class LoanViewComponent implements OnInit {
         this.userModel.credits = [];
         this.creditModel = new Credit();
         this.savingIndicator = false;
+        this.bankInfo={};
     }
 
     onSubmit() {
 
         if(this.creditModel.value && this.userModel.dni){
+            if(this.bankInfo.capital >= this.creditModel.value ){
+
+            
             this.savingIndicator = true;
             this.creditModel.state="rechazado";
             this.userModel.credits.push(this.creditModel);
@@ -72,7 +84,9 @@ export class LoanViewComponent implements OnInit {
                     this.savingIndicator = false;
                 }
             );
-            //this.initValues()
+            }else{
+                alert("el banco no cuenta con tal cantidad ingresa una cifra menor")
+            }
         }else{
             alert("Por favor verifica los campos")
         }

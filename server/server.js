@@ -8,9 +8,14 @@ MongoClient.connect(url, function(err, db) {
   dbo = db.db("zinobe");
   dbo.createCollection("users", function(err, res) {
     if (err) throw err;
-    console.log("Collection created!");
-    db.close();
+    console.log("Collection users created!");
+    dbo.createCollection("banks", function(err, res) {
+        if (err) throw err;
+        console.log("Collection banks created!");
+        db.close();
+      });
   });
+  
   usersCollection = dbo.collection('users')
 });
 
@@ -42,6 +47,21 @@ app.route('/api/users').get((req, res) => {
         })
     });
   })
+
+  app.route('/api/bank').get((req, res) => {
+
+    MongoClient.connect(url, function(err, db) {
+
+        dbo = db.db("zinobe");
+
+        dbo.collection('banks')
+        .findOne({ name: "zinobe" },function(err, result) {
+            if (err) throw err;
+            res.send(result);
+            db.close();
+        })
+    });
+  })
   
 app.route('/api/users').post((req, res) => {
     console.log('POST');
@@ -61,22 +81,44 @@ app.route('/api/users').post((req, res) => {
                 .updateOne({ _id: result._id }, {$set : {"credits": result.credits}}, function(err, resultUpdated) {
                     if (err) throw err;
                     console.log("1 document updated");
-                    res.send(req.body);
-                    db.close();
+                    if(req.body.credits[0].state="ACEPTADO"){
+                        UpdateBankAmmount(dbo,db,req.body,res,req.body.credits[0].value)
+                    }else{
+                        res.send(req.body);
+                        db.close();
+                    }
                   });
             }else {
                 req.body.rejected= aprove();
                 !req.body.rejected? req.body.credits[0].state="ACEPTADO": req.body.credits[0].state="DENEGADO";
                 dbo.collection('users').insertOne(req.body,function(err, result){
                     if (err) throw err;
-                    res.send(req.body);
-                    db.close();
+                    if(req.body.credits[0].state="ACEPTADO"){
+                        UpdateBankAmmount(dbo,db,req.body,res,req.body.credits[0].value)
+                    }else{
+                        res.send(req.body);
+                        db.close();
+                    }
                 })
             }
         })
     });
 })
 
+function UpdateBankAmmount(dbo, db, user, res, approvedAmmount){
+        dbo.collection('banks')
+        .findOne({ name: "zinobe" },function(err, result) {
+
+            dbo.collection("banks")
+                .updateOne({ name: "zinobe" }, {$set : {"capital": result.capital - approvedAmmount}}, function(err, resultUpdated) {
+                    if (err) throw err;
+                    console.log("bank capital updated");
+                    res.send(user);
+
+            db.close();
+        })
+});
+}
 
 function aprove(){
     return Math.random() < 0.5 ? true: false;

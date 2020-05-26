@@ -19,6 +19,7 @@ import { BankInfoViewComponent } from './bank-info-view/bank-info-view.component
 import { TileModule } from '@fundamental-ngx/core';
 import { LoanService } from './commons/services/loan.service';
 import { UserApiService } from './commons/apis/Users.api';
+import { BankApiService } from './commons/apis/Bank.api.service';
 import { LoanListComponent } from './loan-view/loan-list/loan-list.component';
 import { LoanDetailComponent } from './loan-view/loan-detail/loan-detail.component';
 import { ListModule } from '@fundamental-ngx/core';
@@ -51,7 +52,7 @@ import { informComponent } from './loan-view/informs/inform.component';
     HttpClientModule,
     ListModule,
   ],
-  providers: [LoanService, UserApiService,],
+  providers: [LoanService, UserApiService,BankApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
