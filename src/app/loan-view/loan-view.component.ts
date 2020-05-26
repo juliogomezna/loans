@@ -4,6 +4,7 @@ import { FdDate, AlertService } from '@fundamental-ngx/core';
 import { User } from '../commons/models/user.model';
 import { Credit } from '../commons/models/credit.model';
 import { LoanService } from '../commons/services/loan.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-loan-view',
@@ -28,46 +29,53 @@ export class LoanViewComponent implements OnInit {
     creditModel: Credit;
     savingIndicator: boolean;
 
-    constructor(private loanService: LoanService, public alertService: AlertService) {}
+    constructor(private loanService: LoanService, public alertService: AlertService, private router: Router) {}
 
     ngOnInit() {
-        console.log(window.history.state.preFillAmmount);
+        this.initValues();
+    }
+
+    initValues(){
         this.userModel = new User();
         this.userModel.credits = [];
         this.creditModel = new Credit();
         this.savingIndicator = false;
-
-        this.loanService.getAllCredits().subscribe(users => {
-            console.log('fetch ffrom server');
-            console.log(users);
-        });
     }
 
     onSubmit() {
-        this.savingIndicator = true;
-        this.creditModel.state="rechazado";
-        this.userModel.credits.push(this.creditModel);
-        this.loanService.saveUserCredit(this.userModel).subscribe(
-            user => {
-                console.log(user);
-                /*this.savingIndicator = false;
-                const alertRef = this.alertService.open(this.template, {
-                    type: 'success',
-                    duration: -1,
-                    data: {
-                        firstLine: 'El credito ha sido aprobado satisfactoriamente, dirigete a tu cuenta para gestionarlo',
-                    }
-                });
-        
-                alertRef.afterDismissed.subscribe((data) => {
-                    
-                });*/
-            },
-            error => {
-                console.log('there is an error');
-                this.savingIndicator = false;
-            }
-        );
+
+        if(this.creditModel.value && this.userModel.dni){
+            this.savingIndicator = true;
+            this.creditModel.state="rechazado";
+            this.userModel.credits.push(this.creditModel);
+
+            this.loanService.saveUserCredit(this.userModel).subscribe(
+                user => {
+                    console.log(user);
+                    this.savingIndicator = false;
+                    const alertRef = this.alertService.open(this.template, {
+                        type: 'warning',
+                        duration: -1,
+                        data: {
+                            firstLine: 'El estado de tu credito:',
+                            secondLine: `${user.credits[0].state} dirigete a solicitudes para mas detalle`
+                        }
+                    });
+            
+                    alertRef.afterDismissed.subscribe((data) => {
+                        this.router.navigate(['requests']);
+                    });
+                    this.userModel.credits=[];
+                },
+                error => {
+                    console.log('there is an error');
+                    this.savingIndicator = false;
+                }
+            );
+            //this.initValues()
+        }else{
+            alert("Por favor verifica los campos")
+        }
     }
 
     openFromTemplate(): void {

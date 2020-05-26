@@ -5,6 +5,9 @@
             <span class="fd-input-group__addon">$</span>
             <input class="fd-input fd-input-group__input" type="number" placeholder="dinero solicitado" [(ngModel)]="ammountRequested"
                 (input)="validate()">
+                <fd-form-message *ngIf="dirty" [type]="'error'">
+                    Verifica
+                </fd-form-message>
         </div>
     </div>
     <div>

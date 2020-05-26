@@ -7,8 +7,6 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 })
 export class LoanAmmountComponent {
 
-    // TODO: adapt to the model
-    // TODO: Create a validator for this.
     @Input()
     conditions: any;
 
@@ -21,12 +19,15 @@ export class LoanAmmountComponent {
     ammountRequested;
     prevAmmount: number;
 
+    dirty=false
+
+
     validate() {
         this.ammountRequested > this.conditions.ammount.max
             || this.ammountRequested < this.conditions.ammount.min
-            ? this.ammountRequested = this.prevAmmount : this.prevAmmount = this.ammountRequested;
+            ? this.dirty=true : this.dirty= false
 
-        this.ammountEntered.emit(this.ammountRequested);
+        this.dirty? this.ammountEntered.emit(null): this.ammountEntered.emit(this.ammountRequested)
     }
 
 }
